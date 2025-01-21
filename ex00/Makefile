@@ -4,8 +4,8 @@ CFLAGS	= -Wall -Wextra -Werror -std=c++17
 RM		= rm -f
 
 SRC		= megaphone.cpp
-OBJ_DIR	= obj/
-OBJ		= $(SRC:%.cpp=$(OBJ_DIR)%.o)
+OBJ_DIR	= obj
+OBJ		= $(SRC:%.cpp=$(OBJ_DIR)/%.o)
 
 all : $(NAME)
 
@@ -17,7 +17,7 @@ $(OBJ_DIR)/%.o: %.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) $(OBJ_DIR)
+	$(RM) -rf $(OBJ_DIR)
 
 fclean: clean
 	$(RM) $(NAME)
