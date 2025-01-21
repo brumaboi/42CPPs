@@ -6,12 +6,13 @@
 /*   By: sbruma <sbruma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 18:50:43 by sbruma            #+#    #+#             */
-/*   Updated: 2025/01/21 19:20:14 by sbruma           ###   ########.fr       */
+/*   Updated: 2025/01/21 19:47:10 by sbruma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Account.hpp"
 #include <iostream>
+#include <iomanip>
 
 int Account::_nbAccounts = 0;
 int Account::_totalAmount = 0;
@@ -36,5 +37,20 @@ int Account::getNbDeposits(void)
 int Account::getNbWithdrawals(void)
 {
     return _totalNbWithdrawals;
+}
+
+void Account::_displayTimestamp(void)
+{
+    time_t stamp;
+    struct tm *local;
+
+    stamp = time(0);
+    local = localtime(&stamp);
+    std::cout << "[" << local->tm_year + 1900;
+    std::cout << std::setw(2) << std::setfill('0') << local->tm_mon + 1;
+    std::cout << std::setw(2) << std::setfill('0') << local->tm_mday << "_";
+    std::cout << std::setw(2) << std::setfill('0') << local->tm_hour;
+    std::cout << std::setw(2) << std::setfill('0') << local->tm_min;
+    std::cout << std::setw(2) << std::setfill('0') << local->tm_sec << "]";
 }
 
