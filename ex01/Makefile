@@ -15,7 +15,7 @@ CC		= c++
 CFLAGS	= -Wall -Wextra -Werror -std=c++17
 RM		= rm -f
 
-SRC		= PhoneBook.cpp Contact.cpp main.cpp
+SRC		= main.cpp #PhoneBook.cpp Contact.cpp 
 OBJ_DIR	= obj
 OBJ		= $(SRC:%.cpp=$(OBJ_DIR)/%.o)
 
