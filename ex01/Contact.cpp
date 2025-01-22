@@ -10,3 +10,38 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Contact.hpp"
+
+Contact::Contact()
+{
+}
+
+Contact::~Contact()
+{
+}
+
+Contact::get_first_name() const
+{
+    return _first_name;
+}
+
+Contact::get_last_name() const
+{
+    return _last_name;
+}
+
+Contact::get_nickname() const
+{
+    return _nickname;
+}
+
+Contact::get_phone_number() const
+{
+    return _phone_number;
+}
+
+Contact::get_darkest_secret() const
+{
+    return _darkest_secret;
+}
+
