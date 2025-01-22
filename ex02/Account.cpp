@@ -72,3 +72,17 @@ Account::~Account(void)
     std::cout << " index:" << _accountIndex << ";amount:" << _amount << ";closed" << std::endl;
 }
 
+void Account::displayAccountsInfos(void)
+{
+    _displayTimestamp();
+    std::cout << " accounts:" << _nbAccounts << ";total:" << _totalAmount;
+    std::cout << ";deposits:" << _totalNbDeposits << ";withdrawals:" << _totalNbWithdrawals;
+    std::cout << std::endl;
+}
+
+void Account::displayStatus( void ) const
+{
+    _displayTimestamp();
+    std::cout << " index:" << _accountIndex << ";amount:" << _amount;
+    std::cout << ";deposits:" << _nbDeposits << ";withdrawals:" << _nbWithdrawals << std::endl;
+}
