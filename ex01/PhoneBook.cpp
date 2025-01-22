@@ -10,3 +10,24 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "PhoneBook.hpp"
+#include "Contact.hpp"
+
+PhoneBook::PhoneBook()
+    : _index(0)
+{
+}
+
+PhoneBook::~PhoneBook()
+{
+}
+
+void PhoneBook::add_conact()
+{
+
+}
+
+void PhoneBook::search_contact()
+{
+
+}
