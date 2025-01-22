@@ -22,6 +22,38 @@ PhoneBook::~PhoneBook()
 {
 }
 
+bool is_num(const std::string &str)
+{
+    size_t i;
+
+    if(str.empty())
+        return false;
+    i = 0;
+    while (i < str.size())
+    {
+        if (!std::isdigit(str[i]))
+            return false;
+        i++;
+    }
+    return true;
+}
+
+bool is_alpha(const std::string &str)
+{
+    size_t i;
+
+    if(str.empty())
+        return false;
+    i = 0;
+    while (i < str.size())
+    {
+        if (!std::isalpha(str[i]))
+            return false;
+        i++;
+    }
+    return true;
+}
+
 void PhoneBook::add_contact()
 {
     size_t i;
@@ -30,18 +62,43 @@ void PhoneBook::add_contact()
     std::cout << "Enter first name: ";
     if (!std::getline(std::cin, _first_name))
         return ;
+    if (!is_alpha(_first_name) || _first_name.empty())
+    {
+        std::cout << "First name must be alphabetical and not empty!" << std::endl;
+        return ;
+    }
     std::cout << "Enter last name: ";
     if (!std::getline(std::cin, _last_name))
         return ;
+    if (!is_alpha(_last_name) || _last_name.empty())
+    {
+        std::cout << "Last name must be alphabetical and not empty!" << std::endl;
+        return ;
+    }
     std::cout << "Enter nickname: ";
     if (!std::getline(std::cin, _nickname))
         return ;
+    if (_nickname.empty())
+    {
+        std::cout << "Nickname must not be empty!" << std::endl;
+        return ;
+    }
     std::cout << "Enter phone number: ";
     if (!std::getline(std::cin, _phone_number))
         return ;
+    if (!is_num(_phone_number) || _phone_number.empty())
+    {
+        std::cout << "Phone number must be numerical and not empty!" << std::endl;
+        return ;
+    }
     std::cout << "Enter darkest secret: ";
     if (!std::getline(std::cin, _darkest_secret))
         return ;
+    if (_darkest_secret.empty())
+    {
+        std::cout << "Darkest secret must not be empty!" << std::endl;
+        return ;
+    }
     i = _index % MAX_SIZE;
     _contacts[i].set_first_name(_first_name);
     _contacts[i].set_last_name(_last_name);
@@ -89,25 +146,9 @@ void PhoneBook::print_list() const
     }
 }
 
-bool is_num(const std::string &str)
-{
-    size_t i;
-
-    if(str.empty())
-        return false;
-    i = 0;
-    while (i < str.size())
-    {
-        if (!std::isdigit(static_cast<unsigned char>(str[i])))
-            return false;
-        i++;
-    }
-    return true;
-}
-
 void PhoneBook::search_contact()
 {
-    size_t i;
+    int i;
     int the_index;
 
     i = (_index < MAX_SIZE) ? _index : MAX_SIZE;
@@ -126,7 +167,7 @@ void PhoneBook::search_contact()
         return ;
     }
     the_index = std::stoi(input);
-    if (the_index < 1 || the_index > static_cast<int>(i))
+    if (the_index < 1 || the_index > i)
     {
         std::cout << "Index out of range. Try a number between 1 and " << i << std::endl; 
         return ;
