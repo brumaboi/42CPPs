@@ -25,7 +25,11 @@ int main()
     while(1)
     {
         std::cout << "Enter command: ";
-        std::getline(std::cin, command);
+        if (!std::getline(std::cin, command))
+        {
+            std::cout << std::endl;
+            break ;
+        }
         for(int i = 0; command[i]; i++)
 			command[i] = std::toupper(command[i]);
         if (command == "ADD")
@@ -39,7 +43,7 @@ int main()
         else if (command == "EXIT")
         {
             std::cout << "Bye! Bye! We're closing shop!" << std::endl;
-            break;
+            break ;
         }
         else
         {
