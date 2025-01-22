@@ -29,11 +29,11 @@ int main()
 			command[i] = std::toupper(command[i]);
         if (command == "ADD")
         {
-            //function to do add
+            PhoneBook.add_contact();
         }
         else if (command == "SEARCH")
         {
-            //function to do search
+            PhoneBook.search_contact();
         }
         else if (command == "EXIT")
         {
