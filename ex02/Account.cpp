@@ -54,3 +54,21 @@ void Account::_displayTimestamp(void)
     std::cout << std::setw(2) << std::setfill('0') << local->tm_sec << "]";
 }
 
+Account::Account(int initial_deposit)
+    : _accountIndex(_nbAccounts),
+      _amount(initial_deposit),
+      _nbDeposits(0),
+      _nbWithdrawals(0)
+{
+    ++_nbAccounts;
+    _totalAmount += initial_deposit;
+    _displayTimestamp();
+    std::cout << " index:" << _accountIndex << ";amount:" << _amount << ";created" << std::endl;
+}
+
+Account::~Account(void)
+{
+    _displayTimestamp();
+    std::cout << " index:" << _accountIndex << ";amount:" << _amount << ";closed" << std::endl;
+}
+
