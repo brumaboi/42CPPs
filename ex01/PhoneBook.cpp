@@ -63,7 +63,73 @@ void PhoneBook::print_details(size_t index) const
     std::cout << "Darkest Secret: " << contact.get_darkest_secret() << std::endl;
 }
 
+static std::string too_long(const std::string &str)
+{
+    if (str.length() > 10)
+        return str.substr(0, 9) + ".";
+    return str;
+}
+
+void PhoneBook::print_list() const
+{
+    size_t contact_i;
+    size_t i;
+
+    contact_i = (_index < MAX_SIZE) ? _index : MAX_SIZE;
+    std::cout << "|" << std::setw(10) << "Index" << "|" << std::setw(10);
+    std::cout << "First Name" << "|" << std::setw(10) << "Last Name" << "|";
+    std::cout << std::setw(10) << "Nickname" << "|" << std::endl;
+    i = 0;
+    while(i < contact_i)
+    {
+        std::cout << "|" << std::setw(10) << i + 1 << "|" << std::setw(10) << too_long(_contacts[i].get_first_name());
+        std::cout<< "|" << std::setw(10) << too_long(_contacts[i].get_last_name());
+        std::cout << "|" << std::setw(10) << too_long(_contacts[i].get_nickname()) << "|" << std::endl;
+        i++;
+    }
+}
+
+bool is_num(const std::string &str)
+{
+    size_t i;
+
+    if(str.empty())
+        return false;
+    i = 0;
+    while (i < str.size())
+    {
+        if (!std::isdigit(static_cast<unsigned char>(str[i])))
+            return false;
+        i++;
+    }
+    return true;
+}
+
 void PhoneBook::search_contact()
 {
+    size_t i;
+    int the_index;
 
+    i = (_index < MAX_SIZE) ? _index : MAX_SIZE;
+    if (i == 0)
+    {
+        std::cout << "There are no contacts in the PhoneBook. Add some first!" << std::endl;
+        return ;
+    }
+    print_list();
+    std::cout << "Enter contact index to display(1 - " << i << "): ";
+    std::string input;
+    std::getline(std::cin, input);
+    if(!is_num(input))
+    {
+        std::cout << "Index is not a number. Try a number!" << std::endl;
+        return ;
+    }
+    the_index = std::stoi(input);
+    if (the_index < 1 || the_index > static_cast<int>(i))
+    {
+        std::cout << "Index out of range. Try a number between 1 and " << i << std::endl; 
+        return ;
+    }
+    print_details(the_index -1);
 }

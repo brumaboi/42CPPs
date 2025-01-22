@@ -16,6 +16,7 @@
 # include "Contact.hpp"
 # include <iostream>
 # include <string>
+# include <iomanip>
 
 # ifndef MAX_SIZE
 #  define MAX_SIZE 8
@@ -34,7 +35,7 @@ private:
 public:
     PhoneBook();
     ~PhoneBook();
-    
+
     void    add_contact();
     void    search_contact();
 
