@@ -17,6 +17,7 @@
 
 int main()
 {
+    PhoneBook phoneBook;
     std::string command;
 
     std::cout << "Welcome to my Awesome PhoneBook!" << std::endl;
@@ -29,11 +30,11 @@ int main()
 			command[i] = std::toupper(command[i]);
         if (command == "ADD")
         {
-            PhoneBook.add_contact();
+            phoneBook.add_contact();
         }
         else if (command == "SEARCH")
         {
-            PhoneBook.search_contact();
+            phoneBook.search_contact();
         }
         else if (command == "EXIT")
         {

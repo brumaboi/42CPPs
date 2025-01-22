@@ -63,7 +63,7 @@ void PhoneBook::print_details(size_t index) const
     std::cout << "Darkest Secret: " << contact.get_darkest_secret() << std::endl;
 }
 
-void PhoneBook::search_conact()
+void PhoneBook::search_contact()
 {
 
 }
