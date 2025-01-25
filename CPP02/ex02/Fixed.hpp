@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifnder FIXED_HPP
+#ifndef FIXED_HPP
 # define FIXED_HPP
 
 # include <iostream>
@@ -37,7 +37,31 @@ public:
     int		toInt(void) const;
     float	toFloat(void) const;
 
+//6 comparison operators
+    bool  operator>(const Fixed &fixed) const;
+    bool  operator<(const Fixed &fixed) const;
+    bool  operator>=(const Fixed &fixed) const;
+    bool  operator<=(const Fixed &fixed) const;
+    bool  operator==(const Fixed &fixed) const;
+    bool  operator!=(const Fixed &fixed) const;
 
+//4 arithmetic operators
+    Fixed operator+(const Fixed &fixed) const;
+    Fixed operator-(const Fixed &fixed) const;
+    Fixed operator*(const Fixed &fixed) const;
+    Fixed operator/(const Fixed &fixed) const;
+
+//4 increment/decrement operators
+    Fixed &operator++();
+    Fixed operator++(int);
+    Fixed &operator--();
+    Fixed operator--(int);
+
+//overload member functions
+    static Fixed &min(Fixed &a, Fixed &b);
+    static const Fixed &min(const Fixed &a, const Fixed &b);
+    static Fixed &max(Fixed &a, Fixed &b);
+    static const Fixed &max(const Fixed &a, const Fixed &b);
 };
 
 std::ostream &operator<<(std::ostream &, const Fixed &fixed);
