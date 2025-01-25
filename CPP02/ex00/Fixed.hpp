@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbruma <sbruma@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:49:25 by sbruma            #+#    #+#             */
-/*   Updated: 2025/01/23 18:10:20 by sbruma           ###   ########.fr       */
+/*   Updated: 2025/01/25 12:45:52 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ public:
     int		getRawBits(void) const;
 	void	setRawBits(int const raw);
 
-    
 };
 
 #endif
