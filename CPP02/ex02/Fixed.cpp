@@ -77,12 +77,46 @@ std::ostream &operator<<(std::ostream &out, const Fixed &fixed)
 }
 
 // //6 comparison operators
-//     bool  operator>(const Fixed &fixed) const;
-//     bool  operator<(const Fixed &fixed) const;
-//     bool  operator>=(const Fixed &fixed) const;
-//     bool  operator<=(const Fixed &fixed) const;
-//     bool  operator==(const Fixed &fixed) const;
-//     bool  operator!=(const Fixed &fixed) const;
+bool  Fixed::operator>(const Fixed &fixed) const
+{
+    if(toFloat() > fixed.toFloat())
+        return true;
+    return false;
+}
+bool  Fixed::operator<(const Fixed &fixed) const
+{
+    if(toFloat() < fixed.toFloat())
+        return true;
+    return false;
+}
+
+bool  Fixed::operator>=(const Fixed &fixed) const
+{
+    if(toFloat() >= fixed.toFloat())
+        return true;
+    return false;
+}
+
+bool  Fixed::operator<=(const Fixed &fixed) const
+{
+    if(toFloat() <= fixed.toFloat())
+        return true;
+    return false;
+}
+
+bool  Fixed::operator==(const Fixed &fixed) const
+{
+    if(toFloat() == fixed.toFloat())
+        return true;
+    return false;
+}
+
+bool  Fixed::operator!=(const Fixed &fixed) const
+{
+    if(toFloat() != fixed.toFloat())
+        return true;
+    return false;
+}
 
 // //4 arithmetic operators
 //     Fixed operator+(const Fixed &fixed) const;
