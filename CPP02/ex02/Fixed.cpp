@@ -76,7 +76,7 @@ std::ostream &operator<<(std::ostream &out, const Fixed &fixed)
 	return out;
 }
 
-// //6 comparison operators
+//6 comparison operators
 bool  Fixed::operator>(const Fixed &fixed) const
 {
     if(toFloat() > fixed.toFloat())
@@ -118,7 +118,7 @@ bool  Fixed::operator!=(const Fixed &fixed) const
     return false;
 }
 
-// //4 arithmetic operators
+//4 arithmetic operators
 Fixed Fixed::operator+(const Fixed &fixed) const
 {
     return Fixed(toFloat() + fixed.toFloat());
@@ -139,11 +139,32 @@ Fixed Fixed::operator/(const Fixed &fixed) const
     return Fixed(toFloat() / fixed.toFloat());
 }
 
-// //4 increment/decrement operators
-//     Fixed &operator++();
-//     Fixed operator++(int);
-//     Fixed &operator--();
-//     Fixed operator--(int);
+//4 increment/decrement operators
+Fixed &Fixed::operator++()
+{
+    _value++;
+    return *this;
+}
+
+Fixed Fixed::operator++(int)
+{
+    Fixed tmp(*this);
+    operator++();
+    return tmp;
+}
+
+Fixed &Fixed::operator--()
+{
+    _value--;
+    return *this;
+}
+
+Fixed Fixed::operator--(int)
+{
+    Fixed tmp(*this);
+    operator--();
+    return tmp;
+}
 
 // //overload member functions
 //     static Fixed &min(Fixed &a, Fixed &b);
