@@ -10,15 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
 
 int main()
 {
     ClapTrap clap("Denis");
+    ScavTrap scav("Denis2");
     
-    clap.attack("Albert");
-    clap.takeDamage(3);
-    clap.beRepaired(1);
+    scav.attack("Albert");
+    scav.takeDamage(3);
+    scav.beRepaired(1);
     return (0);
 }
