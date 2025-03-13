@@ -14,6 +14,10 @@
 
 int main()
 {
+    ClapTrap clap("Denis");
 
+    clap.attack("Albert");
+    // clap.takeDamage(3);
+    // clap.beRepaired(1);
     return (0);
 }

@@ -44,3 +44,18 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &src)
     return (*this);
 }
 
+void ClapTrap::attack(const std::string& target)
+{
+    if (hitPoints < 0)
+    {
+        std::cout << "ClapTrap " << name << " is dead!" << std::endl;
+        return ;
+    }
+    if (energyPoints < 1)
+    {
+        std::cout << "ClapTrap " << name << " has no energy!" << std::endl;
+        return ;
+    }
+    energyPoints--;
+    std::cout << "ClapTrap " << name << " attacks " << target << ", causing " << attackDamage << " points of damage!" << std::endl;
+}
