@@ -10,3 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Zombie.hpp"
+
+int main(void)
+{
+    Zombie *zombie = newZombie("HeapZombie");
+    zombie->announce();
+    delete zombie;
+    randomChump("StackZombie");
+    return (0);
+}
