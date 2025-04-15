@@ -27,6 +27,8 @@ class Harl{
         Harl(void);
         ~Harl(void);
         void complain( std::string level );
+        void (Harl::*f[4])(void);
+        std::string levels[4];
 };
 
 #endif

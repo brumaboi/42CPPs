@@ -14,6 +14,14 @@
 
 Harl::Harl()
 {
+    f[0] = &Harl::debug;
+    f[1] = &Harl::info;
+    f[2] = &Harl::warning;
+    f[3] = &Harl::error;
+    levels[0] = "DEBUG";
+    levels[1] = "INFO";
+    levels[2] = "WARNING";
+    levels[3] = "ERROR";
 }
 
 Harl::~Harl()
@@ -42,4 +50,20 @@ void Harl::error( void )
 {
     std::cout << "[ERROR]" << std::endl;
     std::cout << "This is unacceptable! I want to speak to the manager now." << std::endl;
+}
+
+void Harl::complain( std::string level )
+{
+    int i;
+
+    i = 0;
+    while (i < 4)
+    {
+        if (levels[i] == level)
+        {
+            (this->*f[i++])();
+            return ;
+        }
+    }
+    std::cout << "No valid level found." << std::endl;
 }
