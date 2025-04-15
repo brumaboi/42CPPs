@@ -20,5 +20,5 @@ Zombie* zombieHorde(int N, std::string name)
     i = 0;
     while (i < N)
         horde[i++].setName(name);
-    return horde;
+    return (horde);
 }
