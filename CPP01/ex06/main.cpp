@@ -10,14 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int main()
+#include "Harl.hpp"
+
+int main(int argc, char **argv)
 {
 	Harl harl;
+	std::string level;
 
-	harl.complain("DEBUG");
-	harl.complain("INFO");
-	harl.complain("WARNING");
-	harl.complain("ERROR");
-	harl.complain("test");
+	if (argc != 2)
+		return (std::cout << "Usage: ./harlFilter <level>" << std::endl, 1);
+	level = argv[1];
+	if (level != "DEBUG" && level != "INFO" && level != "WARNING" && level != "ERROR")
+		return (std::cout << "Error: Invalid level. Valid levels are: DEBUG, INFO, WARNING, ERROR" << std::endl, 1);
+	harl.complain(level);
+	std::cout << std::endl;
     return (0);
 }
