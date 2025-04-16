@@ -25,7 +25,5 @@ int main()
     j->makeSound();
     meta->makeSound();
 
-    ...
-
     return (0);
 }

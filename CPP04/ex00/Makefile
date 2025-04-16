@@ -10,12 +10,12 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= ScavTrap
+NAME	= test
 CC		= c++
 CFLAGS	= -Wall -Wextra -Werror -std=c++17
 RM		= rm -f
 
-SRC		= main.cpp
+SRC		= main.cpp Animal.cpp Cat.cpp Dog.cpp
 OBJ_DIR	= obj
 OBJ		= $(SRC:%.cpp=$(OBJ_DIR)/%.o)
 
