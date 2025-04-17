@@ -18,6 +18,9 @@
 
 class Cat : public Animal{
 
+    private:
+        Brain *brain;
+
     public:
         Cat();
         Cat(const Cat &other);
@@ -25,6 +28,7 @@ class Cat : public Animal{
         ~Cat();
 
         void makeSound() const;
+        Brain *getBrain() const;
 };
 
 #endif
