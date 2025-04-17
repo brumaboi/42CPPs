@@ -23,20 +23,21 @@ int main()
     const Animal* i = new Cat();
     std::cout << j->getType() << " " << std::endl;
     std::cout << i->getType() << " " << std::endl;
-    i->makeSound(); //will output the cat sound!
-    j->makeSound(); //will output the dog sound!
-    meta->makeSound(); //will output the random animal text!
+    i->makeSound(); //will output the Cat sound!
+    j->makeSound(); //will output the Dog sound!
+    meta->makeSound(); //will output the randomAnimal text!
     delete meta;
     delete j;
     delete i;
+    
     const WrongAnimal* wrongMeta = new WrongAnimal();
     const WrongAnimal* wrongCat = new WrongCat();
     const WrongCat* specificWrongCat = new WrongCat();
     std::cout << wrongMeta->getType() << " " << std::endl;
     std::cout << wrongCat->getType() << " " << std::endl;
-    wrongMeta->makeSound(); //will output the random animal text!
-    wrongCat->makeSound(); //will output the random animal text!
-    specificWrongCat->makeSound(); //will output the random animal text!
+    wrongMeta->makeSound(); // Outputs the WrongAnimal text!
+    wrongCat->makeSound();  // Outputs the WrongAnimal text! (not the WrongCat sound)
+    specificWrongCat->makeSound(); // Outputs the WrongCat sound
     delete wrongMeta;
     delete wrongCat;
     delete specificWrongCat;
