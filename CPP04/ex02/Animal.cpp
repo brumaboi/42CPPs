@@ -37,7 +37,6 @@ Animal &Animal::operator=(const Animal &other)
     return (*this);
 }
 
-
 std::string Animal::getType() const 
 {
     return (type);
