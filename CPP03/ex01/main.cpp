@@ -20,5 +20,10 @@ int main()
     scav.attack("Albert");
     scav.takeDamage(3);
     scav.beRepaired(1);
+    scav.guardGate();
+    scav.guardGate();
+    clap.attack("Albert");
+    clap.takeDamage(3);
+    clap.beRepaired(1);
     return (0);
 }
