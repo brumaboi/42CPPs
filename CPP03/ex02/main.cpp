@@ -10,15 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
 int main()
 {
     ClapTrap clap("Denis");
-    ScavTrap scav("Denis2");
-    
-    scav.attack("Albert");
-    scav.takeDamage(3);
-    scav.beRepaired(1);
+    FragTrap frag("Denis2");
+
+    frag.attack("Albert");
+    frag.takeDamage(3);
+    frag.beRepaired(1);
+    frag.highFivesGuys();
+    frag.highFivesGuys();
     return (0);
 }
