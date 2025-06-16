@@ -57,12 +57,12 @@ void Bureaucrat::setGrade(int grade)
 
 void Bureaucrat::incrementGrade()
 {
-    setGrade(grade--);
+    setGrade(grade - 1);
 }
 
 void Bureaucrat::decrementGrade()
 {
-    setGrade(grade++);
+    setGrade(grade + 1);
 }
 
 const char *Bureaucrat::GradeTooHighException::what() const throw()

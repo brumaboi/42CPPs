@@ -19,11 +19,11 @@
 class Bureaucrat {
 
     private:
+        std::string const name; 
         int grade;
-        std::string const name;
         void setGrade(int grade);
 
-        
+
     public:
         Bureaucrat();
         Bureaucrat(const std::string &name, int grade);
@@ -40,15 +40,15 @@ class Bureaucrat {
         class GradeTooHighException : public std::exception
         {
             public:
-                const char *what() const throw() override;
+                virtual const char *what() const throw();
         };
         class GradeTooLowException : public std::exception
         {
             public:
-                const char *what() const throw() override;
+                virtual const char *what() const throw();
         };
-}
+};
 
-std::ostream &operator<<(std::ostream &os, const Bureaucrat &bureaucrat);
+std::ostream &operator<<(std::ostream &stream, const Bureaucrat &bureaucrat);
 
 #endif
