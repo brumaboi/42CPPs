@@ -18,14 +18,12 @@ int main()
     std::cout << "Test 1: " << std::endl;
     try
     {
-        Bureaucrat bureaucrat("Bureaucrat", 1);
+        Form form("Form1", 50, 30);
+        Bureaucrat bureaucrat("Bureaucrat1", 20);
+        std::cout << form << std::endl;
         std::cout << bureaucrat << std::endl;
-        bureaucrat.decrementGrade();
-        std::cout << bureaucrat << std::endl;
-        bureaucrat.incrementGrade();
-        std::cout << bureaucrat << std::endl;
-        bureaucrat.incrementGrade(); // This should throw an exception
-        std::cout << bureaucrat << std::endl;
+        bureaucrat.signForm(form);
+        std::cout << form << std::endl;
     }
     catch(const std::exception& e)
     {
@@ -35,33 +33,26 @@ int main()
     std::cout << std::endl << "Test 2: " << std::endl;
     try
     {
-        Bureaucrat bureaucrat("Bureaucrat", 150);
+        Form form("Form2", 20, 10);
+        Bureaucrat bureaucrat("Bureaucrat2", 50);
+        std::cout << form << std::endl;
         std::cout << bureaucrat << std::endl;
-        bureaucrat.decrementGrade(); // This should throw an exception
-        std::cout << bureaucrat << std::endl;
+        bureaucrat.signForm(form);
+        std::cout << form << std::endl;
     }
     catch(const std::exception& e)
     {
         std::cerr << e.what() << std::endl;
     }
 
-    std::cout << std::endl << "Test 3: " << std::endl;
+    std::cout << std::endl << "Test 3:" << std::endl;
     try
     {
-        Bureaucrat bureaucrat("Bureaucrat", 0); // This should throw an exception
+        Form form("Form3", 0, 10);
+        std::cout << form << std::endl;
     }
     catch(const std::exception& e)
     {
         std::cerr << e.what() << std::endl;
     }
-
-    std::cout << std::endl << "Test 4: " << std::endl;
-    try
-    {
-        Bureaucrat bureaucrat("Bureaucrat", 151); // This should throw an exception
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << std::endl;
-    }    
 }
