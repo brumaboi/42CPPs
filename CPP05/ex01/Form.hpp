@@ -48,8 +48,6 @@ class Form {
             public:
                 virtual const char *what() const throw();
         };
-
-
 };
 
 std::ostream &operator<<(std::ostream &stream, const Form &form);
