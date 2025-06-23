@@ -15,7 +15,13 @@ CC		= c++
 CFLAGS	= -Wall -Wextra -Werror -std=c++17
 RM		= rm -f
 
-SRC		= 
+SRC		= AForm.cpp \
+		  Bureaucrat.cpp \
+		  PresidentialPardonForm.cpp \
+		  RobotomyRequestForm.cpp \
+		  ShrubberyCreationForm.cpp \
+		  main.cpp
+		  
 OBJ_DIR	= obj
 OBJ		= $(SRC:%.cpp=$(OBJ_DIR)/%.o)
 
