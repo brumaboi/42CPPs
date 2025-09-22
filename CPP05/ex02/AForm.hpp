@@ -6,14 +6,13 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 14:06:35 by marvin            #+#    #+#             */
-/*   Updated: 2025/06/16 14:06:35 by marvin           ###   ########.fr       */
+/*   Updated: 2025/09/22 23:07:46 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef AFORM_HPP
-# define AFORM_HPP
+#pragma once
 
-# include "Bureaucrat.hpp"
+#include "Bureaucrat.hpp"
 
 class Bureaucrat;
 
@@ -38,6 +37,9 @@ class Form {
         bool getSigned() const;
         int getSignGrade() const;
         int getExecuteGrade() const;
+
+        virtual void execute(Bureaucrat const &executor) const = 0;
+
         class GradeTooHighException : public std::exception
         {
             public:
@@ -48,8 +50,16 @@ class Form {
             public:
                 virtual const char *what() const throw();
         };
+        class FormAlreadySignedException : public std::exception
+        {
+            public:
+                virtual const char *what() const throw();
+        };
+        class FormNotSignedException : public std::exception
+        {
+            public:
+                virtual const char *what() const throw();
+        };
 };
 
 std::ostream &operator<<(std::ostream &stream, const Form &form);
-
-#endif

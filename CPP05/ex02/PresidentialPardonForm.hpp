@@ -6,7 +6,26 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 14:07:00 by marvin            #+#    #+#             */
-/*   Updated: 2025/06/16 14:07:00 by marvin           ###   ########.fr       */
+/*   Updated: 2025/09/22 22:51:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
+
+#include "AForm.hpp"
+
+class PresidentialPardonForm : public Form
+{
+    private:
+        std::string _target;
+
+    public:
+        PresidentialPardonForm();
+        PresidentialPardonForm(const std::string &target);
+        PresidentialPardonForm(const PresidentialPardonForm &other);
+        PresidentialPardonForm &operator=(const PresidentialPardonForm &other);
+        ~PresidentialPardonForm();
+        
+        std::string getTarget() const;
+        void execute(Bureaucrat const &executor) const;
+};

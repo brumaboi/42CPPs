@@ -6,16 +6,15 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 14:06:42 by marvin            #+#    #+#             */
-/*   Updated: 2025/06/16 14:06:42 by marvin           ###   ########.fr       */
+/*   Updated: 2025/09/22 23:20:43 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUREAUCRAT_HPP
-# define BUREAUCRAT_HPP
+#pragma once
 
-# include <iostream>
-# include <exception>
-# include "AForm.hpp"
+#include <iostream>
+#include <exception>
+#include "AForm.hpp"
 
 class Bureaucrat {
 
@@ -39,6 +38,8 @@ class Bureaucrat {
         void decrementGrade();
         void signForm(class Form &form);
 
+        void executeForm(Form const & form);
+
         class GradeTooHighException : public std::exception
         {
             public:
@@ -52,5 +53,3 @@ class Bureaucrat {
 };
 
 std::ostream &operator<<(std::ostream &stream, const Bureaucrat &bureaucrat);
-
-#endif

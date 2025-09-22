@@ -6,14 +6,13 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 14:06:27 by marvin            #+#    #+#             */
-/*   Updated: 2025/06/16 14:06:27 by marvin           ###   ########.fr       */
+/*   Updated: 2025/09/22 23:03:09 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FORM_HPP
-# define FORM_HPP
+#pragma once
 
-# include "Bureaucrat.hpp"
+#include "Bureaucrat.hpp"
 
 class Bureaucrat;
 
@@ -48,8 +47,11 @@ class Form {
             public:
                 virtual const char *what() const throw();
         };
+        class FormAlreadySignedException : public std::exception
+        {
+            public:
+                virtual const char *what() const throw();
+        };
 };
 
 std::ostream &operator<<(std::ostream &stream, const Form &form);
-
-#endif
