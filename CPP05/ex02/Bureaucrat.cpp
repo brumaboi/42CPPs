@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 14:06:38 by marvin            #+#    #+#             */
-/*   Updated: 2025/09/22 23:20:40 by marvin           ###   ########.fr       */
+/*   Updated: 2025/09/23 10:40:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ std::ostream &operator<<(std::ostream &stream, const Bureaucrat &bureaucrat)
     return (stream);
 }
 
-void Bureaucrat::signForm(Form &form)
+void Bureaucrat::signForm(AForm &form)
 {
     try
     {
@@ -95,7 +95,7 @@ void Bureaucrat::signForm(Form &form)
     }
 }
 
-void Bureaucrat::executeForm(Form const & form)
+void Bureaucrat::executeForm(AForm const & form) const
 {
     try
     {
