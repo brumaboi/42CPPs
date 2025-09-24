@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/16 14:06:48 by marvin            #+#    #+#              #
-#    Updated: 2025/06/16 14:06:48 by marvin           ###   ########.fr        #
+#    Updated: 2025/09/24 20:25:51 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRC		= AForm.cpp \
 		  PresidentialPardonForm.cpp \
 		  RobotomyRequestForm.cpp \
 		  ShrubberyCreationForm.cpp \
+		  Intern.cpp \
 		  main.cpp
 		  
 OBJ_DIR	= obj
