@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 13:55:10 by marvin            #+#    #+#             */
-/*   Updated: 2025/06/16 13:55:10 by marvin           ###   ########.fr       */
+/*   Updated: 2025/09/26 00:18:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,6 @@ void Bureaucrat::signForm(Form &form)
     }
     catch (const std::exception &e)
     {
-        std::cout << name << " cannot sign " << form.getName() << " because: " << e.what() << std::endl;
+        std::cout << name << " cannot sign " << form.getName() << " because: \033[31m" << e.what() << " \033[0m" << std::endl;
     }
 }
