@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 14:08:34 by marvin            #+#    #+#             */
-/*   Updated: 2025/09/23 10:42:23 by marvin           ###   ########.fr       */
+/*   Updated: 2025/09/25 21:08:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void RobotomyRequestForm::execute(Bureaucrat const &executor) const
     AForm::execute(executor);
     std::cout << "*drilling noises*" << std::endl;
     if (std::rand() % 2)
-        std::cout << _target << " has been robotomized successfully." << std::endl;
+        std::cout << "\033[33m" << _target << " has been robotomized \033[32msuccessfully.\033[0m" << std::endl;
     else
-        std::cout << "The robotomy on " << _target << " has failed." << std::endl;
+        std::cout << "\033[33mThe robotomy on " << _target << "\033[31m has failed.\033[0m" << std::endl;
 }
