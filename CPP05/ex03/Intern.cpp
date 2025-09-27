@@ -65,10 +65,10 @@ AForm *Intern::makeForm(const std::string &formName, const std::string &target) 
     {
         if (formName == formNames[i])
         {
-            std::cout << "Intern creates " << formName << std::endl;
+            std::cout << "\033[32m" << "Intern creates " << formName << "\033[0m" << std::endl;
             return (this->*formCreators[i])(target);
         }
     }
-    std::cout << "Intern cannot create " << formName << " because it is unknown." << std::endl;
+    std::cout << "\033[33m" << "Intern cannot create " << formName << " because it is \033[31munknown." << "\033[0m" << std::endl;
     return nullptr;
 }
