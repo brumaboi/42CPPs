@@ -97,6 +97,28 @@ std::string get_type(const std::string literal)
     }
 }
 
+void general_out(std::string c, std::string i, std::string f, std::string d)
+{
+    std::cout << "char: " << c << std::endl;
+    std::cout << "int: " << i << std::endl;
+    std::cout << "float: " << f << std::endl;
+    std::cout << "double: " << d << std::endl;
+}
+
+std::string cfloat(float f)
+{
+    std::ostringstream oss;
+    oss << std::fixed << std::setprecision(1) << f << "f";
+    return oss.str();
+}
+
+std::string cdouble(double d)
+{
+    std::ostringstream oss;
+    oss << std::fixed << std::setprecision(1) << d;
+    return oss.str();
+}
+
 void convert_out(std::string type, std::string literal)
 {
     if (type == "char")
@@ -104,10 +126,7 @@ void convert_out(std::string type, std::string literal)
         int i = static_cast<int>(literal[0]);
         float f = static_cast<float>(i);
         double d = static_cast<double>(i);
-        std::cout << "char: '" << literal[0] << "'" << std::endl;
-        std::cout << "int: " << i << std::endl;
-        std::cout << "float: " << std::fixed << std::setprecision(1) << f << "f" << std::endl;
-        std::cout << "double: " << std::fixed << std::setprecision(1) << d << std::endl;
+        general_out(literal, std::to_string(i), cfloat(f), cdouble(d));
     }
     
     if (type == "int")
@@ -116,10 +135,7 @@ void convert_out(std::string type, std::string literal)
         char c = static_cast<char>(i);
         float f = static_cast<float>(i);
         double d = static_cast<double>(i);
-        std::cout << "int: " << i << std::endl;
-        std::cout << "char: '" << c << "'" << std::endl;
-        std::cout << "float: " << std::fixed << std::setprecision(1) << f << "f" << std::endl;
-        std::cout << "double: " << std::fixed << std::setprecision(1) << d << std::endl;
+        general_out(std::string(1, c), std::to_string(i), cfloat(f), cdouble(d));
     }
 
     if (type == "float")
@@ -128,10 +144,7 @@ void convert_out(std::string type, std::string literal)
         int i = static_cast<int>(f);
         char c = static_cast<char>(i);
         double d = static_cast<double>(f);
-        std::cout << "float: " << std::fixed << std::setprecision(1) << f << "f" << std::endl;
-        std::cout << "int: " << i << std::endl;
-        std::cout << "char: '" << c << "'" << std::endl;
-        std::cout << "double: " << std::fixed << std::setprecision(1) << d << std::endl;
+        general_out(std::string(1, c), std::to_string(i), cfloat(f), cdouble(d));
     }
 
     if (type == "double")
@@ -140,10 +153,7 @@ void convert_out(std::string type, std::string literal)
         int i = static_cast<int>(d);
         char c = static_cast<char>(i);
         float f = static_cast<float>(d);
-        std::cout << "double: " << std::fixed << std::setprecision(1) << d << std::endl;
-        std::cout << "int: " << i << std::endl;
-        std::cout << "char: '" << c << "'" << std::endl;
-        std::cout << "float: " << std::fixed << std::setprecision(1) << f << "f" << std::endl;
+        general_out(std::string(1, c), std::to_string(i), cfloat(f), cdouble(d));
     }
 
     if (type == "invalid")
@@ -156,6 +166,5 @@ void ScalarConverter::convert(const std::string& literal)
 {
     std::string type = get_type(literal);
 
-    // std::cout << type << std::endl;
     convert_out(type, literal);
 }
