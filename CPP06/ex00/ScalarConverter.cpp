@@ -97,9 +97,65 @@ std::string get_type(const std::string literal)
     }
 }
 
+void convert_out(std::string type, std::string literal)
+{
+    if (type == "char")
+    {
+        int i = static_cast<int>(literal[0]);
+        float f = static_cast<float>(i);
+        double d = static_cast<double>(i);
+        std::cout << "char: '" << literal[0] << "'" << std::endl;
+        std::cout << "int: " << i << std::endl;
+        std::cout << "float: " << std::fixed << std::setprecision(1) << f << "f" << std::endl;
+        std::cout << "double: " << std::fixed << std::setprecision(1) << d << std::endl;
+    }
+    
+    if (type == "int")
+    {
+        int i = std::stoi(literal);
+        char c = static_cast<char>(i);
+        float f = static_cast<float>(i);
+        double d = static_cast<double>(i);
+        std::cout << "int: " << i << std::endl;
+        std::cout << "char: '" << c << "'" << std::endl;
+        std::cout << "float: " << std::fixed << std::setprecision(1) << f << "f" << std::endl;
+        std::cout << "double: " << std::fixed << std::setprecision(1) << d << std::endl;
+    }
+
+    if (type == "float")
+    {
+        float f = std::stof(literal);
+        int i = static_cast<int>(f);
+        char c = static_cast<char>(i);
+        double d = static_cast<double>(f);
+        std::cout << "float: " << std::fixed << std::setprecision(1) << f << "f" << std::endl;
+        std::cout << "int: " << i << std::endl;
+        std::cout << "char: '" << c << "'" << std::endl;
+        std::cout << "double: " << std::fixed << std::setprecision(1) << d << std::endl;
+    }
+
+    if (type == "double")
+    {
+        double d = std::stod(literal);
+        int i = static_cast<int>(d);
+        char c = static_cast<char>(i);
+        float f = static_cast<float>(d);
+        std::cout << "double: " << std::fixed << std::setprecision(1) << d << std::endl;
+        std::cout << "int: " << i << std::endl;
+        std::cout << "char: '" << c << "'" << std::endl;
+        std::cout << "float: " << std::fixed << std::setprecision(1) << f << "f" << std::endl;
+    }
+
+    if (type == "invalid")
+    {
+        std::cout << "Invalid literal" << std::endl;
+    }
+}
+
 void ScalarConverter::convert(const std::string& literal)
 {
     std::string type = get_type(literal);
 
-    std::cout << type << std::endl;
+    // std::cout << type << std::endl;
+    convert_out(type, literal);
 }
