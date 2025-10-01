@@ -40,6 +40,18 @@ static bool isSign(char c)
     return (c == '+' || c == '-');
 }
 
+static bool isUnsignedDigit(std::string const& str)
+{
+    if (str.empty())
+        return false;
+    for (unsigned char c : str)
+    {
+        if (!std::isdigit(c))
+            return false;
+    }
+    return true;
+}
+
 std::string get_type(const std::string literal)
 {
     if (literal == "nanf" || literal == "+inff" || literal == "-inff" || literal == "inff")
@@ -71,7 +83,9 @@ std::string get_type(const std::string literal)
         std::string fracPart = core.substr(dotPos + 1);
         if (intPart.empty() || fracPart.empty())
             return "invalid";
-        /// Check intPart and fracPart are digits with helpers
+        if ((!isUnsignedDigit(intPart) && !intPart.empty())
+            || (!isUnsignedDigit(fracPart) && !fracPart.empty()))
+            return "invalid";
         return "float";
     }
     else
@@ -81,8 +95,8 @@ std::string get_type(const std::string literal)
         auto dotPos = core.find('.');
         if (dotPos == std::string::npos)
         {
-            //int
-            /// Check core is digits with helpers
+            if (!isUnsignedDigit(core))
+                return "invalid";
             return "int";
         }
         else
@@ -91,7 +105,9 @@ std::string get_type(const std::string literal)
             std::string fracPart = core.substr(dotPos + 1);
             if (intPart.empty() || fracPart.empty())
                 return "invalid";
-            /// Check intPart and fracPart are digits with helpers
+            if ((!isUnsignedDigit(intPart) && !intPart.empty())
+                || (!isUnsignedDigit(fracPart) && !fracPart.empty()))
+                return "invalid";
             return "double";
         }
     }
@@ -105,14 +121,35 @@ void general_out(std::string c, std::string i, std::string f, std::string d)
     std::cout << "double: " << d << std::endl;
 }
 
-std::string cfloat(float f)
+static std::string outChar(double c)
+{
+    if (!std::isfinite(c) || c < 0 || c > 127)
+        return "impossible";
+    
+    int v = static_cast<int>(c);
+    unsigned char uc = static_cast<unsigned char>(v);
+    if (!std::isprint(uc))
+        return "Non displayable";
+    return std::string(1, static_cast<char>(uc));
+}
+
+static std::string outInt(double i)
+{
+    if (!std::isfinite(i))
+        return "impossible";
+    if (i < static_cast<double>(std::numeric_limits<int>::min()) || i > static_cast<double>(std::numeric_limits<int>::max()))
+        return "impossible";
+    return std::to_string(static_cast<int>(i));
+}
+
+static std::string outFloat(float f)
 {
     std::ostringstream oss;
     oss << std::fixed << std::setprecision(1) << f << "f";
     return oss.str();
 }
 
-std::string cdouble(double d)
+static std::string outDouble(double d)
 {
     std::ostringstream oss;
     oss << std::fixed << std::setprecision(1) << d;
@@ -121,43 +158,38 @@ std::string cdouble(double d)
 
 void convert_out(std::string type, std::string literal)
 {
-    if (type == "char")
+    try
     {
-        int i = static_cast<int>(literal[0]);
-        float f = static_cast<float>(i);
-        double d = static_cast<double>(i);
-        general_out(literal, std::to_string(i), cfloat(f), cdouble(d));
-    }
-    
-    if (type == "int")
-    {
-        int i = std::stoi(literal);
-        char c = static_cast<char>(i);
-        float f = static_cast<float>(i);
-        double d = static_cast<double>(i);
-        general_out(std::string(1, c), std::to_string(i), cfloat(f), cdouble(d));
-    }
+        double l;
+        if (type == "char")
+        {
+            char c = (literal.size() == 3 && literal[0] == '\'' && literal[2] == '\'') ? literal[1] : literal[0];
+            l = static_cast<unsigned char>(c);
+        }
+        
+        else if (type == "int")
+        {
+            long long ll = std::stoll(literal);
+            l = static_cast<double>(ll);
+        }
 
-    if (type == "float")
-    {
-        float f = std::stof(literal);
-        int i = static_cast<int>(f);
-        char c = static_cast<char>(i);
-        double d = static_cast<double>(f);
-        general_out(std::string(1, c), std::to_string(i), cfloat(f), cdouble(d));
-    }
+        else if (type == "float")
+        {
+            l = static_cast<double>(std::stof(literal));
+        }
 
-    if (type == "double")
-    {
-        double d = std::stod(literal);
-        int i = static_cast<int>(d);
-        char c = static_cast<char>(i);
-        float f = static_cast<float>(d);
-        general_out(std::string(1, c), std::to_string(i), cfloat(f), cdouble(d));
-    }
+        else if (type == "double")
+        {
+            l = std::stod(literal);
+        }
+        else
+        {
+            throw std::exception();
+        }
 
-    if (type == "invalid")
-    {
+        general_out(outChar(l), outInt(l), outFloat(l), outDouble(l));
+            
+    } catch (const std::exception&){
         std::cout << "Invalid literal" << std::endl;
     }
 }

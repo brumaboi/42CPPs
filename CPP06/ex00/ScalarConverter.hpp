@@ -16,6 +16,9 @@
 #include <iomanip>
 #include <sstream>
 #include <string>
+#include <cctype>
+#include <limits>
+#include <cmath>
 
 class ScalarConverter {
     
