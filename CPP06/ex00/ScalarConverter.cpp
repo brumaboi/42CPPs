@@ -12,6 +12,7 @@
 
 #include "ScalarConverter.hpp"
 
+//=========SPECIAL MEMBERS=========//
 ScalarConverter::ScalarConverter()
 {
 }
@@ -33,8 +34,7 @@ ScalarConverter::~ScalarConverter()
 {
 }
 
-////////////////////////////////////////////////////////////////////////////////////
-
+//====================HELPERS====================//
 static bool isSign(char c)
 {
     return (c == '+' || c == '-');
@@ -52,12 +52,16 @@ static bool isUnsignedDigit(std::string const& str)
     return true;
 }
 
+//====================TYPE DETECTION====================//
 std::string get_type(const std::string literal)
 {
     if (literal == "nanf" || literal == "+inff" || literal == "-inff" || literal == "inff")
         return "float";
     if (literal == "nan" || literal == "+inf" || literal == "-inf" || literal == "inf")
         return "double";
+
+    if (literal.size() == 3 && literal[0] == '\'' && literal[2] == '\'')
+        return "char";
 
     if (literal.size() == 1)
     {
@@ -113,6 +117,8 @@ std::string get_type(const std::string literal)
     }
 }
 
+
+//====================OUTPUT====================//
 void general_out(std::string c, std::string i, std::string f, std::string d)
 {
     std::cout << "char: " << c << std::endl;
@@ -156,6 +162,7 @@ static std::string outDouble(double d)
     return oss.str();
 }
 
+//====================CONVERSION====================//
 void convert_out(std::string type, std::string literal)
 {
     try
@@ -169,7 +176,7 @@ void convert_out(std::string type, std::string literal)
         
         else if (type == "int")
         {
-            long long ll = std::stoll(literal);
+            long long ll = std::stold(literal);
             l = static_cast<double>(ll);
         }
 
