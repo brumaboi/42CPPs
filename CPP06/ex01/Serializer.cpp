@@ -35,10 +35,12 @@ Serializer::~Serializer()
 
 uintptr_t Serializer::serialize(Data* ptr)
 {
-    //to be implemented
+    uintptr_t raw = reinterpret_cast<uintptr_t>(ptr);
+    return raw;
 }
 
 Data* Serializer::deserialize(uintptr_t raw)
 {
-    //to be implemented
+    Data *ptr = reinterpret_cast<Data*>(raw);
+    return ptr;
 }
