@@ -13,12 +13,13 @@
 #pragma once
 
 #include <iostream>
+#include <cstdint>
 
 struct Data {
 
-    int i;
+    int value;
     std::string str;
-}
+};
 
 class Serializer {
 
