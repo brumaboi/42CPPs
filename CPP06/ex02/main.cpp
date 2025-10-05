@@ -10,3 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Base.hpp"
+#include "A.hpp"
+#include "B.hpp"
+#include "C.hpp"
+#include <iostream>
+
+int main()
+{
+    for (int i = 0; i < 10; i++)
+    {
+        Base *base = generate();
+        identify(base); // identify using pointer
+        identify(*base); // identify using reference
+        delete base;
+        std::cout << "---------------------" << std::endl;
+    }
+    return 0;
+}
