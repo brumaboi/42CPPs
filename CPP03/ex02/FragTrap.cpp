@@ -14,9 +14,9 @@
 
 FragTrap::FragTrap(std::string name) : ClapTrap(name)
 {
-    setHitPoints(100);
-    setEnergyPoints(100);
-    setAttackDamage(30);
+    hitPoints = 100;
+    energyPoints = 100;
+    attackDamage = 30;
     std::cout << "FragTrap " << name << " is constructed!" << std::endl;
 }
 

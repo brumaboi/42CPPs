@@ -46,7 +46,7 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &src)
 
 void ClapTrap::attack(const std::string& target)
 {
-    if (hitPoints < 0)
+    if (hitPoints <= 0)
     {
         std::cout << "ClapTrap " << name << " is dead!" << std::endl;
         return ;
@@ -62,7 +62,7 @@ void ClapTrap::attack(const std::string& target)
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
-    if (hitPoints < 0)
+    if (hitPoints <= 0)
     {
         std::cout << "ClapTrap " << name << " is dead!" << std::endl;
         return ;
@@ -73,7 +73,7 @@ void ClapTrap::takeDamage(unsigned int amount)
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
-    if (hitPoints < 0)
+    if (hitPoints <= 0)
     {
         std::cout << "ClapTrap " << name << " is dead!" << std::endl;
         return ;

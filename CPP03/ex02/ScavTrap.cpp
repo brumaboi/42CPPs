@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 11:49:48 by marvin            #+#    #+#             */
-/*   Updated: 2025/03/13 11:49:48 by marvin           ###   ########.fr       */
+/*   Updated: 2025/10/10 22:43:40 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 {
-    setHitPoints(100);
-    setEnergyPoints(50);
-    setAttackDamage(20);
+    hitPoints = 100;
+    energyPoints = 50;
+    attackDamage = 20;
     std::cout << "ScavTrap " << name << " is constructed!" << std::endl;
 }
 

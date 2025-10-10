@@ -19,5 +19,7 @@ int main()
     clap.attack("Albert");
     clap.takeDamage(3);
     clap.beRepaired(1);
+    clap.takeDamage(10);
+    clap.attack("Bob"); //should print "is dead"
     return (0);
 }
