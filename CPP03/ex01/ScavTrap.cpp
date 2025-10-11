@@ -14,9 +14,9 @@
 
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 {
-    setHitPoints(100);
-    setEnergyPoints(50);
-    setAttackDamage(20);
+    hitPoints = 100;
+    energyPoints = 50;
+    attackDamage = 20;
     std::cout << "ScavTrap " << name << " is constructed!" << std::endl;
 }
 
