@@ -10,3 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <iostream>
+
+class RPN {
+
+    private:
+        RPN() = delete;
+        RPN(const RPN& other) = delete;
+        RPN& operator=(const RPN& other) = delete;
+        ~RPN() = delete;  
+
+    public:
+        static int calculate(const std::string& input);
+};

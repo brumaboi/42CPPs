@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= btc
+NAME	= test
 CC		= c++
 CFLAGS	= -Wall -Wextra -Werror -std=c++17
 RM		= rm -f

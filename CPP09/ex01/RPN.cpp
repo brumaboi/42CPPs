@@ -10,3 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "RPN.hpp"
+
+int RPN::calculate(const std::string& input) {
+    (void)input;
+    // RPN logic
+    return 0;
+}
