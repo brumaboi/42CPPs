@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
+#    By: sbruma <sbruma@student.42heilbronn.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/10/06 23:29:16 by marvin            #+#    #+#              #
-#    Updated: 2025/10/06 23:29:16 by marvin           ###   ########.fr        #
+#    Created: 2026/02/20 12:00:24 by sbruma            #+#    #+#              #
+#    Updated: 2026/02/20 12:00:24 by sbruma           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CC		= c++
 CFLAGS	= -Wall -Wextra -Werror -std=c++17
 RM		= rm -f
 
-SRC		= 
+SRC		= main.cpp
 		  
 OBJ_DIR	= obj
 OBJ		= $(SRC:%.cpp=$(OBJ_DIR)/%.o)
