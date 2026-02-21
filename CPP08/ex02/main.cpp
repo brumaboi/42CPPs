@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sbruma <sbruma@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/17 13:31:27 by marvin            #+#    #+#             */
-/*   Updated: 2026/02/17 13:31:27 by marvin           ###   ########.fr       */
+/*   Created: 2026/02/21 18:36:32 by sbruma            #+#    #+#             */
+/*   Updated: 2026/02/21 18:36:32 by sbruma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "MutantStack.hpp"
 
 int main()
 {

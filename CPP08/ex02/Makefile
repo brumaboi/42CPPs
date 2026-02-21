@@ -3,12 +3,13 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
+#    By: sbruma <sbruma@student.42heilbronn.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2026/02/17 13:31:30 by marvin            #+#    #+#              #
-#    Updated: 2026/02/17 13:31:30 by marvin           ###   ########.fr        #
+#    Created: 2026/02/21 18:40:52 by sbruma            #+#    #+#              #
+#    Updated: 2026/02/21 18:40:52 by sbruma           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 NAME	= test
 CC		= c++
