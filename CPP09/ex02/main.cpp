@@ -14,7 +14,7 @@
 
 int main(int argc, char **argv) {
     try{
-        checkInput(argc, argv);
+        PmergeMe::checkInput(argc, argv);
     }
     catch (const std::exception &e) {
         std::cerr << "Error: " << e.what() << std::endl;
@@ -25,32 +25,31 @@ int main(int argc, char **argv) {
     clock_t start_vec;
     clock_t end_vec;
     std::vector<int> copy_vec;
-    fill_vec(copy_vec, argc, argv);
+    PmergeMe::fill(copy_vec, argc, argv);
     std::cout << "Before: " << copy_vec << std::endl;
     start_vec = clock();
-    fill_vec(vec, argc, argv);
-    //sort logic here
+    PmergeMe::fill(vec, argc, argv);
+    PmergeMe::sort(vec);
     end_vec = clock();
     try {
-        check_sorted_vec(vec);
+        PmergeMe::checkSorted(vec);
     }
     catch (const std::exception &e) {
         std::cerr << "Error: " << e.what() << std::endl;
         return 1;
     }
 
-
     std::deque<int> deq;
     clock_t start_deq;
     clock_t end_deq;
     std::deque<int> copy_deq;
-    fill_deq(copy_deq, argc, argv);
+    PmergeMe::fill(copy_deq, argc, argv);
     start_deq = clock();
-    fill_deq(deq, argc, argv);
-    //sort logic here
+    PmergeMe::fill(deq, argc, argv);
+    PmergeMe::sort(deq);
     end_deq = clock();
     try {
-        check_sorted_deq(deq);
+        PmergeMe::checkSorted(deq);
     }
     catch (const std::exception &e) {
         std::cerr << "Error: " << e.what() << std::endl;
