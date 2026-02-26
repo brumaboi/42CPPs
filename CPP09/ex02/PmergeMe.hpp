@@ -17,6 +17,9 @@
 #include <string>
 #include <stdexcept>
 #include <exception>
+#include <algorithm>
+#include <utility>
+#include <ctime>
 
 class PmergeMe {
 public:
@@ -32,8 +35,6 @@ public:
     static void checkSorted(const std::deque<int> &deq);
     static void sort(std::vector<int> &vec);
     static void sort(std::deque<int> &deq);
-
-
 };
 
 std::ostream &operator<<(std::ostream &os, const std::vector<int> &vec);
