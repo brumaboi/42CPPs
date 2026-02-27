@@ -12,6 +12,10 @@
 
 #include "BitcoinExchange.hpp"
 
-BitcoinExchange::BitcoinExchange() {
+//TODO: Implement the methods declared in BitcoinExchange.hpp
 
+void BitcoinExchange::handleInputFile(const std::string &filename) {
+    inputFile = filename;
+    parseDataFile();
+    processInputFile();
 }

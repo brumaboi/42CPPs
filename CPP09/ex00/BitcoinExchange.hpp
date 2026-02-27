@@ -11,25 +11,27 @@
 /* ************************************************************************** */
 
 #include <map>
+#include <string>
 #include <iostream>
+#include <fstream>
+#include <sstream>
+#include <cstdlib>
+#include <stdexcept>
 
 class BitcoinExchange {
 
     private:
         std::map<std::string, double> exchangeRates;
-        const std::string dataFile = "data.csv";
+        const std::string dataFile = "input.csv";
         std::string inputFile;
 
-        bool isValidDate(const std::string &date) const;
-        bool isValidInput(const std::string &line) const;
-
     public:
-        BitcoinExchange();
-        ~BitcoinExchange();
+        BitcoinExchange() = default;
+        ~BitcoinExchange() = default;
         BitcoinExchange(const BitcoinExchange &other) = delete;
         BitcoinExchange &operator=(const BitcoinExchange &other) = delete;
 
         void parseDataFile();
-        void processDataFile();
+        void processInputFile();
         void handleInputFile(const std::string &filename);
 };
