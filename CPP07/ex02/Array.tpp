@@ -31,12 +31,12 @@ Array<T>::~Array() {
 template <typename T>
 Array<T>& Array<T>::operator=(const Array<T>& other) {
     if (this != &other) {
+        T* newArr = new T[other.n]();
+        for (unsigned int i = 0; i < other.n; ++i)
+            newArr[i] = other.arr[i];
         delete[] arr;
+        arr = newArr;
         n = other.n;
-        arr = new T[n]();
-        for (unsigned int i = 0; i < n; ++i) {
-            arr[i] = other.arr[i];
-        }
     }
     return *this;
 }
@@ -46,6 +46,13 @@ T& Array<T>::operator[](unsigned int index) {
     if (index >= n) {
         throw OutOfBoundsException();
     }
+    return arr[index];
+}
+
+template <typename T>
+const T& Array<T>::operator[](unsigned int index) const {
+    if (index >= n)
+        throw OutOfBoundsException();
     return arr[index];
 }
 
