@@ -15,6 +15,8 @@
 #include "B.hpp"
 #include "C.hpp"
 #include <iostream>
+#include <cstdlib>
+#include <ctime> 
 
 Base *generate(void)
 {

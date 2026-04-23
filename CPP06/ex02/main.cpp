@@ -18,13 +18,17 @@
 
 int main()
 {
-    for (int i = 0; i < 10; i++)
+    std::cout << "\033[34m=== Testing generate() + identify(ptr) + identify(ref) ===\033[0m" << std::endl;
     {
-        Base *base = generate();
-        identify(base); // identify using pointer
-        identify(*base); // identify using reference
-        delete base;
-        std::cout << "---------------------" << std::endl;
+        for (int i = 0; i < 10; i++)
+        {
+            Base* base = generate();
+            std::cout << "\033[33m--- run " << i + 1 << " ---\033[0m" << std::endl;
+            identify(base);
+            identify(*base);
+            delete base;
+        }
     }
+ 
     return 0;
 }

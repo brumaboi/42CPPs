@@ -14,25 +14,29 @@
 
 int main()
 {
-    Data a{1, "a"}, b{2, "b"};
+    std::cout << "\033[34m=== Testing round-trip: deserialize(serialize(p)) == p ===\033[0m" << std::endl;
+    {
+        Data original{42, "hello"};
+        uintptr_t raw = Serializer::serialize(&original);
+        Data* restored = Serializer::deserialize(raw);
 
-    // Serialize the pointer to Data
-    uintptr_t SerializedData = Serializer::serialize(&a);
-    std::cout << "Serialized value: " << SerializedData << std::endl;
-    // Deserialize the uintptr_t back to a pointer to Data
-    Data* deserializedData = Serializer::deserialize(SerializedData);
-    std::cout << "Deserialized value: " << deserializedData->value << std::endl;
+        std::cout << "&original: " << &original << std::endl;
+        std::cout << "raw:       " << raw        << "  (" << std::hex << "0x" << raw << std::dec << ")" << std::endl;
+        std::cout << "restored:  " << restored   << std::endl;
+        std::cout << "match:     " << (restored == &original ? "OK" : "KO") << std::endl;
+    }
 
-    // Check if the original and deserialized pointers are the same
-    if (deserializedData == &a)
-        std::cout << "Success: The original and deserialized pointers are the same." << std::endl;
-    else
-        std::cout << "Error: The pointers do not match!" << std::endl;
+    std::cout << "\n\033[34m=== Testing writing via restored affect original ===\033[0m" << std::endl;
+    {
+        Data original{10, "before"};
+        Data* restored = Serializer::deserialize(Serializer::serialize(&original));
 
-    // Check with incorrect data
-    if (deserializedData == &b)
-        std::cout << "Success: The original and deserialized pointers are the same." << std::endl;
-    else
-        std::cout << "Error: The pointers do not match!" << std::endl;
+        std::cout << "before -> original: {" << original.value << ", " << original.str << "}" << std::endl;
+        restored->value = 99;
+        restored->str = "after";
+        std::cout << "after  -> original: {" << original.value << ", " << original.str << "}" << std::endl;
+        std::cout << "aliased:   " << (original.value == 99 && original.str == "after" ? "OK" : "KO") << std::endl;
+    }
+
     return 0;
 }
