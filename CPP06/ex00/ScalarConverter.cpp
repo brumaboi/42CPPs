@@ -12,7 +12,6 @@
 
 #include "ScalarConverter.hpp"
 
-//=========SPECIAL MEMBERS=========//
 ScalarConverter::ScalarConverter()
 {
 }
@@ -34,7 +33,6 @@ ScalarConverter::~ScalarConverter()
 {
 }
 
-//====================HELPERS====================//
 static bool isSign(char c)
 {
     return (c == '+' || c == '-');
@@ -52,8 +50,7 @@ static bool isUnsignedDigit(std::string const& str)
     return true;
 }
 
-//====================TYPE DETECTION====================//
-std::string get_type(const std::string literal)
+static std::string get_type(const std::string literal)
 {
     if (literal == "nanf" || literal == "+inff" || literal == "-inff" || literal == "inff")
         return "float";
@@ -94,7 +91,6 @@ std::string get_type(const std::string literal)
     }
     else
     {
-        //no trailing f --> double or int
         std::string core = literal.substr(i);
         auto dotPos = core.find('.');
         if (dotPos == std::string::npos)
@@ -117,11 +113,12 @@ std::string get_type(const std::string literal)
     }
 }
 
-
-//====================OUTPUT====================//
-void general_out(std::string c, std::string i, std::string f, std::string d)
+static void general_out(std::string c, std::string i, std::string f, std::string d)
 {
-    std::cout << "char: " << c << std::endl;
+    if (c == "impossible" || c == "Non displayable")
+        std::cout << "char: " << c << std::endl;
+    else
+        std::cout << "char: '" << c << "'" << std::endl;
     std::cout << "int: " << i << std::endl;
     std::cout << "float: " << f << std::endl;
     std::cout << "double: " << d << std::endl;
@@ -151,19 +148,29 @@ static std::string outInt(double i)
 static std::string outFloat(float f)
 {
     std::ostringstream oss;
-    oss << std::fixed << std::setprecision(1) << f << "f";
+    if (std::isnan(f) || std::isinf(f))
+        oss << f;
+    else if (f == static_cast<int>(f))
+        oss << std::fixed << std::setprecision(1) << f;
+    else
+        oss << f;
+    oss << "f";
     return oss.str();
 }
 
 static std::string outDouble(double d)
 {
     std::ostringstream oss;
-    oss << std::fixed << std::setprecision(1) << d;
+    if (std::isnan(d) || std::isinf(d))
+        oss << d;
+    else if (d == static_cast<int>(d))
+        oss << std::fixed << std::setprecision(1) << d;
+    else
+        oss << d;
     return oss.str();
 }
 
-//====================CONVERSION====================//
-void convert_out(std::string type, std::string literal)
+static void convert_out(std::string type, std::string literal)
 {
     try
     {
@@ -173,29 +180,19 @@ void convert_out(std::string type, std::string literal)
             char c = (literal.size() == 3 && literal[0] == '\'' && literal[2] == '\'') ? literal[1] : literal[0];
             l = static_cast<unsigned char>(c);
         }
-        
-        else if (type == "int")
+        else if (type == "int" || type == "double")
         {
-            long long ll = std::stold(literal);
-            l = static_cast<double>(ll);
+            l = std::stod(literal);
         }
-
         else if (type == "float")
         {
             l = static_cast<double>(std::stof(literal));
-        }
-
-        else if (type == "double")
-        {
-            l = std::stod(literal);
         }
         else
         {
             throw std::exception();
         }
-
-        general_out(outChar(l), outInt(l), outFloat(l), outDouble(l));
-            
+        general_out(outChar(l), outInt(l), outFloat(l), outDouble(l));    
     } catch (const std::exception&){
         std::cout << "Invalid literal" << std::endl;
     }
