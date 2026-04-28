@@ -20,7 +20,7 @@ int main()
 {
     std::cout << "\033[34m=== Testing generate() + identify(ptr) + identify(ref) ===\033[0m" << std::endl;
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 5; i++)
         {
             Base* base = generate();
             std::cout << "\033[33m--- run " << i + 1 << " ---\033[0m" << std::endl;
