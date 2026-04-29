@@ -12,27 +12,6 @@
 
 #include "Serializer.hpp"
 
-Serializer::Serializer()
-{
-}
-
-Serializer::Serializer(const Serializer& other)
-{
-    if (this != &other)
-        *this = other;
-}
-
-Serializer& Serializer::operator=(const Serializer& other)
-{
-    if (this != &other)
-        *this = other;
-    return *this;
-}
-
-Serializer::~Serializer()
-{
-}
-
 uintptr_t Serializer::serialize(Data* ptr)
 {
     uintptr_t raw = reinterpret_cast<uintptr_t>(ptr);

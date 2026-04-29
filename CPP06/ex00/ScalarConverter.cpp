@@ -12,27 +12,6 @@
 
 #include "ScalarConverter.hpp"
 
-ScalarConverter::ScalarConverter()
-{
-}
-
-ScalarConverter::ScalarConverter(const ScalarConverter& other)
-{
-    if (this != &other)
-        *this = other;
-}
-
-ScalarConverter& ScalarConverter::operator=(const ScalarConverter& other)
-{
-    if (this != &other)
-        *this = other;
-    return *this;
-}
-
-ScalarConverter::~ScalarConverter()
-{
-}
-
 static bool isSign(char c)
 {
     return (c == '+' || c == '-');
