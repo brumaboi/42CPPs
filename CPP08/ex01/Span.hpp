@@ -10,6 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef SPAN_H
+#define SPAN_H
+
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -46,3 +49,5 @@ class Span {
 };
 
 std::ostream &operator<<(std::ostream &os, const Span &span);
+
+#endif

@@ -10,6 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef EASYFIND_HPP
+#define EASYFIND_HPP
+
 #include <algorithm>
 #include <iterator>
 
@@ -21,3 +24,5 @@ typename T::iterator easyfind(T &container, int value)
         throw std::runtime_error("Value not found in container");
     return it;
 }
+
+#endif

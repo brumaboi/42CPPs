@@ -10,6 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef MUTANTSTACK_H
+#define MUTANTSTACK_H
+
 #include <stack>
 #include <iostream>
 
@@ -32,3 +35,5 @@ class MutantStack : public std::stack<T> {
 };
 
 #include "MutantStack.tpp"
+
+#endif
