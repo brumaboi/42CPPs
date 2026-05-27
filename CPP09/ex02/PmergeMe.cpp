@@ -35,7 +35,11 @@ void PmergeMe::checkInput(int argc, char **argv) {
                 throw std::invalid_argument("Invalid input: " + arg);
             }
         }
-        std::stoi(arg);
+        try {
+            std::stoi(arg);
+        } catch (const std::out_of_range &) {
+            throw std::invalid_argument("Value out of int range: " + arg);
+        }
     }
 }
 
