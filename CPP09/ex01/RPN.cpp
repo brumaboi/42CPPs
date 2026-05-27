@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   RPN.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbruma <sbruma@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: sbruma <sbruma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 13:13:21 by sbruma            #+#    #+#             */
-/*   Updated: 2026/02/18 13:13:21 by sbruma           ###   ########.fr       */
+/*   Updated: 2026/05/27 14:43:57 by sbruma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RPN.hpp"
-#include <stack>
-#include <sstream>
 
 int RPN::calculate(const std::string& input) {
     
@@ -46,13 +44,11 @@ int RPN::calculate(const std::string& input) {
                 stack.push(a / b);
             }
         } else {
-            try {
-                double num = std::stod(token);
-                stack.push(num);
-            } catch (const std::invalid_argument&) {
-                std::cerr << "Error: Invalid token '" << token << "'" << std::endl;
+            if (token.length() != 1 || !std::isdigit(token[0])) {
+                std::cerr << "Error" << std::endl;
                 return 1;
             }
+            stack.push(token[0] - '0');
         }
     }
     if (stack.size() != 1) {
