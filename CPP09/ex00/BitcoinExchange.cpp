@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbruma <sbruma@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: sbruma <sbruma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 13:11:33 by sbruma            #+#    #+#             */
-/*   Updated: 2026/02/18 13:11:33 by sbruma           ###   ########.fr       */
+/*   Updated: 2026/05/27 14:06:20 by sbruma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void BitcoinExchange::processInputFile() {
                 continue ;
         }
         if (line.empty()) {
-            std::cerr << "Error: bad input => " << line << std::endl;
             continue ;
         }
         std::size_t sep = line.find(" | ");
