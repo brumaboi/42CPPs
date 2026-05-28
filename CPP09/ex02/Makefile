@@ -73,9 +73,9 @@ test_valid: $(NAME)
 	@echo ""
 
 test_invalid: $(NAME)
-	@echo "=========================================="
-	@echo "Invalid Input Tests (all should print Error)"
-	@echo "=========================================="
+	@echo "====================="
+	@echo " Invalid Input Tests"
+	@echo "====================="
 	@echo ""
 	@printf "\033[33mTest 1: Negative number\033[0m\n"
 	@./$(NAME) -1 2 || true
@@ -97,9 +97,9 @@ test_invalid: $(NAME)
 	@echo ""
 
 test_large: $(NAME)
-	@echo "=========================================="
-	@echo "Large Input Test - 3000 elements from 1-10000"
-	@echo "=========================================="
+	@echo "=================="
+	@echo " Large Input Test"
+	@echo "=================="
 	@echo ""
 	@./$(NAME) $(shell shuf -i 1-10000 -n 3000 | tr '\n' ' ')
 	@echo ""

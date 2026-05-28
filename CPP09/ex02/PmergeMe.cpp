@@ -23,7 +23,6 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &other) {
 
 PmergeMe::~PmergeMe() {}
 
-// Static methods
 void PmergeMe::checkInput(int argc, char **argv) {
     if (argc < 2) {
         throw std::invalid_argument("Usage: " + std::string(argv[0]) + " <numbers...>");
@@ -43,35 +42,141 @@ void PmergeMe::checkInput(int argc, char **argv) {
     }
 }
 
-void PmergeMe::fill(std::vector<int> &vec, int argc, char **argv) {
-    for (int i = 1; i < argc; ++i) {
-        vec.push_back(std::stoi(argv[i]));
-    }
-}
+void PmergeMe::sortVector(std::vector<int> &c) {
+    typedef std::pair<int, int> Pair;
 
-void PmergeMe::fill(std::deque<int> &deq, int argc, char **argv) {
-    for (int i = 1; i < argc; ++i) {
-        deq.push_back(std::stoi(argv[i]));
-    }
-}
+    size_t n = c.size();
+    if (n <= 1)
+        return;
 
-void PmergeMe::checkSorted(const std::vector<int> &vec) {
-    for (size_t i = 1; i < vec.size(); ++i) {
-        if (vec[i] < vec[i - 1]) {
-            throw std::runtime_error("Vector is not sorted");
+    bool hasUnpaired = (n % 2 != 0);
+    int unpaired = 0;
+    if (hasUnpaired)
+        unpaired = c[n - 1];
+
+    size_t pairCount = n / 2;
+    std::vector<Pair> pairs;
+    for (size_t i = 0; i < pairCount; ++i) {
+        if (c[2 * i] >= c[2 * i + 1])
+            pairs.push_back(std::make_pair(c[2 * i], c[2 * i + 1]));
+        else
+            pairs.push_back(std::make_pair(c[2 * i + 1], c[2 * i]));
+    }
+
+    std::vector<int> winners;
+    for (size_t i = 0; i < pairs.size(); ++i)
+        winners.push_back(pairs[i].first);
+
+    PmergeMe::sortVector(winners);
+
+    std::vector<int> mainChain;
+    std::vector<int> pend;
+    std::vector<Pair> remainPairs = pairs;
+    for (size_t i = 0; i < winners.size(); ++i) {
+        mainChain.push_back(winners[i]);
+        for (size_t j = 0; j < remainPairs.size(); ++j) {
+            if (remainPairs[j].first == winners[i]) {
+                pend.push_back(remainPairs[j].second);
+                remainPairs.erase(remainPairs.begin() + j);
+                break;
+            }
         }
     }
+
+    mainChain.insert(mainChain.begin(), pend[0]);
+
+    std::vector<size_t> order = jacobsthalOrder(pend.size());
+    for (size_t i = 0; i < order.size(); ++i) {
+        int val = pend[order[i]];
+        std::vector<int>::iterator pos = std::lower_bound(mainChain.begin(), mainChain.end(), val);
+        mainChain.insert(pos, val);
+    }
+
+    if (hasUnpaired) {
+        std::vector<int>::iterator pos = std::lower_bound(mainChain.begin(), mainChain.end(), unpaired);
+        mainChain.insert(pos, unpaired);
+    }
+
+    c = mainChain;
 }
 
-void PmergeMe::checkSorted(const std::deque<int> &deq) {
-    for (size_t i = 1; i < deq.size(); ++i) {
-        if (deq[i] < deq[i - 1]) {
-            throw std::runtime_error("Deque is not sorted");
+void PmergeMe::sortDeque(std::deque<int> &c) {
+    typedef std::pair<int, int> Pair;
+
+    size_t n = c.size();
+    if (n <= 1)
+        return;
+
+    bool hasUnpaired = (n % 2 != 0);
+    int unpaired = 0;
+    if (hasUnpaired)
+        unpaired = c[n - 1];
+
+    size_t pairCount = n / 2;
+    std::vector<Pair> pairs;
+    for (size_t i = 0; i < pairCount; ++i) {
+        if (c[2 * i] >= c[2 * i + 1])
+            pairs.push_back(std::make_pair(c[2 * i], c[2 * i + 1]));
+        else
+            pairs.push_back(std::make_pair(c[2 * i + 1], c[2 * i]));
+    }
+
+    std::deque<int> winners;
+    for (size_t i = 0; i < pairs.size(); ++i)
+        winners.push_back(pairs[i].first);
+
+    PmergeMe::sortDeque(winners);
+
+    std::deque<int> mainChain;
+    std::deque<int> pend;
+    std::vector<Pair> remainPairs = pairs;
+    for (size_t i = 0; i < winners.size(); ++i) {
+        mainChain.push_back(winners[i]);
+        for (size_t j = 0; j < remainPairs.size(); ++j) {
+            if (remainPairs[j].first == winners[i]) {
+                pend.push_back(remainPairs[j].second);
+                remainPairs.erase(remainPairs.begin() + j);
+                break;
+            }
         }
     }
+
+    mainChain.insert(mainChain.begin(), pend[0]);
+
+    std::vector<size_t> order = jacobsthalOrder(pend.size());
+    for (size_t i = 0; i < order.size(); ++i) {
+        int val = pend[order[i]];
+        std::deque<int>::iterator pos = std::lower_bound(mainChain.begin(), mainChain.end(), val);
+        mainChain.insert(pos, val);
+    }
+
+    if (hasUnpaired) {
+        std::deque<int>::iterator pos = std::lower_bound(mainChain.begin(), mainChain.end(), unpaired);
+        mainChain.insert(pos, unpaired);
+    }
+
+    c = mainChain;
 }
 
-static std::vector<size_t> getJacobsthalOrder(size_t pendSize) {
+double PmergeMe::main_testVector(std::vector<int> &c, int argc, char **argv) {
+    clock_t start = clock();
+    PmergeMe::fill(c, argc, argv);
+    PmergeMe::sortVector(c);
+    clock_t end = clock();
+    PmergeMe::checkSorted(c);
+    return static_cast<double>(end - start) / CLOCKS_PER_SEC * 1e6;
+}
+
+double PmergeMe::main_testDeque(std::deque<int> &c, int argc, char **argv) {
+    clock_t start = clock();
+    PmergeMe::fill(c, argc, argv);
+    PmergeMe::sortDeque(c);
+    clock_t end = clock();
+    PmergeMe::checkSorted(c);
+    return static_cast<double>(end - start) / CLOCKS_PER_SEC * 1e6;
+}
+
+std::vector<size_t> PmergeMe::jacobsthalOrder(size_t pendSize) {
     std::vector<size_t> order;
     if (pendSize <= 1)
         return order;
@@ -89,134 +194,4 @@ static std::vector<size_t> getJacobsthalOrder(size_t pendSize) {
             order.push_back(j - 1);
     }
     return order;
-}
-
-void PmergeMe::sort(std::vector<int> &vec) {
-    size_t n = vec.size();
-    if (n <= 1)
-        return;
-
-    bool hasUnpaired = (n % 2 != 0);
-    int unpaired = 0;
-    if (hasUnpaired)
-        unpaired = vec[n - 1];
-
-    size_t pairCount = n / 2;
-    std::vector<std::pair<int, int> > pairs;
-    for (size_t i = 0; i < pairCount; ++i) {
-        if (vec[2 * i] >= vec[2 * i + 1])
-            pairs.push_back(std::make_pair(vec[2 * i], vec[2 * i + 1]));
-        else
-            pairs.push_back(std::make_pair(vec[2 * i + 1], vec[2 * i]));
-    }
-
-    std::vector<int> winners;
-    for (size_t i = 0; i < pairs.size(); ++i)
-        winners.push_back(pairs[i].first);
-
-    sort(winners);
-
-    std::vector<int> mainChain;
-    std::vector<int> pend;
-    std::vector<std::pair<int, int> > remainPairs = pairs;
-    for (size_t i = 0; i < winners.size(); ++i) {
-        mainChain.push_back(winners[i]);
-        for (size_t j = 0; j < remainPairs.size(); ++j) {
-            if (remainPairs[j].first == winners[i]) {
-                pend.push_back(remainPairs[j].second);
-                remainPairs.erase(remainPairs.begin() + j);
-                break;
-            }
-        }
-    }
-
-    mainChain.insert(mainChain.begin(), pend[0]);
-
-    std::vector<size_t> order = getJacobsthalOrder(pend.size());
-    for (size_t i = 0; i < order.size(); ++i) {
-        int val = pend[order[i]];
-        std::vector<int>::iterator pos = std::lower_bound(mainChain.begin(), mainChain.end(), val);
-        mainChain.insert(pos, val);
-    }
-
-    if (hasUnpaired) {
-        std::vector<int>::iterator pos = std::lower_bound(mainChain.begin(), mainChain.end(), unpaired);
-        mainChain.insert(pos, unpaired);
-    }
-
-    vec = mainChain;
-}
-
-void PmergeMe::sort(std::deque<int> &deq) {
-    size_t n = deq.size();
-    if (n <= 1)
-        return;
-
-    bool hasUnpaired = (n % 2 != 0);
-    int unpaired = 0;
-    if (hasUnpaired)
-        unpaired = deq[n - 1];
-
-    size_t pairCount = n / 2;
-    std::deque<std::pair<int, int> > pairs;
-    for (size_t i = 0; i < pairCount; ++i) {
-        if (deq[2 * i] >= deq[2 * i + 1])
-            pairs.push_back(std::make_pair(deq[2 * i], deq[2 * i + 1]));
-        else
-            pairs.push_back(std::make_pair(deq[2 * i + 1], deq[2 * i]));
-    }
-
-    std::deque<int> winners;
-    for (size_t i = 0; i < pairs.size(); ++i)
-        winners.push_back(pairs[i].first);
-
-    sort(winners);
-
-    std::deque<int> mainChain;
-    std::deque<int> pend;
-    std::deque<std::pair<int, int> > remainPairs = pairs;
-    for (size_t i = 0; i < winners.size(); ++i) {
-        mainChain.push_back(winners[i]);
-        for (size_t j = 0; j < remainPairs.size(); ++j) {
-            if (remainPairs[j].first == winners[i]) {
-                pend.push_back(remainPairs[j].second);
-                remainPairs.erase(remainPairs.begin() + j);
-                break;
-            }
-        }
-    }
-
-    mainChain.push_front(pend[0]);
-
-    std::vector<size_t> order = getJacobsthalOrder(pend.size());
-    for (size_t i = 0; i < order.size(); ++i) {
-        int val = pend[order[i]];
-        std::deque<int>::iterator pos = std::lower_bound(mainChain.begin(), mainChain.end(), val);
-        mainChain.insert(pos, val);
-    }
-
-    if (hasUnpaired) {
-        std::deque<int>::iterator pos = std::lower_bound(mainChain.begin(), mainChain.end(), unpaired);
-        mainChain.insert(pos, unpaired);
-    }
-
-    deq = mainChain;
-}
-
-std::ostream &operator<<(std::ostream &os, const std::vector<int> &vec) {
-    for (size_t i = 0; i < vec.size(); ++i) {
-        if (i > 0)
-            os << " ";
-        os << vec[i];
-    }
-    return os;
-}
-
-std::ostream &operator<<(std::ostream &os, const std::deque<int> &deq) {
-    for (size_t i = 0; i < deq.size(); ++i) {
-        if (i > 0)
-            os << " ";
-        os << deq[i];
-    }
-    return os;
 }
