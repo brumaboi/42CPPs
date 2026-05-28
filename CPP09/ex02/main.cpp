@@ -37,8 +37,7 @@ int main(int argc, char **argv) {
         return 1;
     }
 
-    std::cout << "\033[34mAfter(vec): \033[0m" << vec << std::endl;
-    std::cout << "\033[34mAfter(deq): \033[0m" << deq << std::endl;
+    std::cout << "\033[34mAfter: \033[0m" << vec << std::endl;
     std::cout << std::fixed << std::setprecision(5);
     std::cout << "Time to process a range of " << vec.size() << " elements with std::vector : " << elapsed_vec << " us" << std::endl;
     std::cout << "Time to process a range of " << deq.size() << " elements with std::deque : " << elapsed_deq << " us" << std::endl;

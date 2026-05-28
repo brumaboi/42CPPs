@@ -41,6 +41,13 @@ test: $(NAME)
 		> $(TEST_DIR)/edge_dates.txt
 	@printf "date | value\n2011-01-01 | 0\n2011-01-01 | 0.001\n2011-01-01 | 1000\n2011-01-01 | 1001\n2011-01-01 | -0.5\n2011-01-01 | 999.99\n2011-01-01 | abc\n2011-01-01 | \n" \
 		> $(TEST_DIR)/edge_values.txt
+	@printf ""  > $(TEST_DIR)/empty.txt
+	@printf "date | value\n" > $(TEST_DIR)/header_only.txt
+	@printf "\n\n\n" > $(TEST_DIR)/whitespace_only.txt
+	@printf "date | value\n2013-13-01 | 1\n2012-02-30 | 1\n0000-01-01 | 1\n2011/01/03 | 1\n2011-1-3 | 1\n2011-01-03x | 1\n20110103 | 1\n" \
+		> $(TEST_DIR)/bad_dates.txt
+	@printf "date | value\n2011-01-01 | 1000.0\n2011-01-01 | 1000.001\n2011-01-01 | -0\n2011-01-01 | +5\n2011-01-01 | 1e2\n2011-01-01 |  \n2011-01-01| 1\n2011-01-01 |1\n" \
+		> $(TEST_DIR)/tricky_values.txt
 
 tclean:
 	$(RM) -rf $(TEST_DIR)

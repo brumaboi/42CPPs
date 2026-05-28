@@ -33,6 +33,8 @@ void PmergeMe::checkInput(int argc, char **argv) {
             if (!std::isdigit(arg[j])) {
                 throw std::invalid_argument("Invalid input: " + arg);
             }
+            if (std::stoi(arg) <= 0)
+                throw std::invalid_argument("Not a positive integer: " + arg);
         }
         try {
             std::stoi(arg);
